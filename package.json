@@ -1,0 +1,75 @@
+{
+  "name": "ps-timer",
+  "displayName": "psTimer",
+  "description": "ICPC-style problem solving timer with reading phase, input blocking, and auto-snapshots",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "psTimer",
+          "title": "psTimer",
+          "icon": "$(clock)"
+        }
+      ]
+    },
+    "views": {
+      "psTimer": [
+        {
+          "type": "webview",
+          "id": "psTimer.timerView",
+          "name": "Timer"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "psTimer.start",
+        "title": "psTimer: Start Session"
+      },
+      {
+        "command": "psTimer.pause",
+        "title": "psTimer: Pause / Resume"
+      },
+      {
+        "command": "psTimer.reset",
+        "title": "psTimer: Reset"
+      },
+      {
+        "command": "psTimer.addProblem",
+        "title": "psTimer: Add Problem"
+      }
+    ],
+    "configuration": {
+      "title": "psTimer",
+      "properties": {
+        "psTimer.snapshotFolder": {
+          "type": "string",
+          "default": "psTimer_snapshots",
+          "description": "Folder name (relative to workspace root) where snapshots are saved."
+        },
+        "psTimer.snapshotIntervalMinutes": {
+          "type": "number",
+          "default": 5,
+          "description": "How often (in minutes) to auto-save a snapshot during the solving phase."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  }
+}
