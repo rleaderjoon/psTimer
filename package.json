@@ -2,11 +2,13 @@
   "name": "ps-timer",
   "displayName": "psTimer",
   "description": "ICPC-style problem solving timer with reading phase, input blocking, and auto-snapshots",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.85.0"
   },
-  "categories": ["Other"],
+  "categories": [
+    "Other"
+  ],
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
@@ -65,7 +67,8 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "watch": "tsc -watch -p ./",
+    "build": "npm version patch --no-git-tag-version && vsce package --allow-missing-repository"
   },
   "devDependencies": {
     "@types/vscode": "^1.85.0",
