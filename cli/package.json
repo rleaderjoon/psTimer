@@ -1,0 +1,37 @@
+{
+  "name": "ps-timer-cli",
+  "version": "1.0.0",
+  "description": "ICPC-style problem solving timer — standalone CLI",
+  "type": "module",
+  "bin": {
+    "pstimer": "./bin/pstimer.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/index.tsx",
+    "watch": "tsc -p tsconfig.json --watch",
+    "package:win": "npm run build && caxa --input . --exclude node_modules/.cache --output ../pstimer.exe -- \"{{caxa}}/node_modules/.bin/node\" \"{{caxa}}/bin/pstimer.js\""
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "diff": "^5.1.0",
+    "ink": "^4.4.1",
+    "ink-select-input": "^5.0.0",
+    "ink-spinner": "^5.0.0",
+    "ink-text-input": "^5.0.1",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/diff": "^5.0.9",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@yao-pkg/pkg": "^6.14.2",
+    "caxa": "^3.0.1",
+    "esbuild": "^0.28.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

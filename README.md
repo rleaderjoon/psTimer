@@ -1,14 +1,123 @@
-# psTimer 🕓
+# psTimer
 
-ICPC-style problem solving timer for VS Code. Features a reading phase, automated input blocking, and auto-snapshots.
+백준(BOJ) 문제 풀이 시간을 측정하고 코드 변화를 자동으로 스냅샷으로 기록하는 CLI 타이머입니다.
 
-## 🌟 Features
-- **Reading Phase (15m)**: Focus on understanding the problem. Keyboard input is automatically blocked during this phase.
-- **Solving Phase (45m)**: Start coding!
-- **Auto-Snapshots**: Automatically saves snapshots of your code at regular intervals.
-- **Antigravity AI Integration**: Includes a bridge to Antigravity (AI Agent) for analyzing similar problems based on your Baekjoon link.
+## 기능
 
-## 🚀 How to use
-1. Open the **psTimer** view in the activity bar.
-2. Click **[Start Session]** to begin.
-3. Use **[Add Problem]** to link a Baekjoon problem and ask Antigravity for similar challenges!
+- **읽기 단계 (15분)**: 문제를 읽는 시간. Java 파일 편집이 자동으로 차단됩니다.
+- **풀이 단계 (45분)**: 코딩 시간. 3분마다 코드 스냅샷이 자동으로 저장됩니다.
+- **풀이 이력**: 문제별 소요 시간과 코드 진행 과정(diff)을 확인할 수 있습니다.
+
+## 설치 및 실행
+
+```bash
+cd cli
+npm install
+npm run build
+node bin/pstimer.js
+```
+
+## 사용법
+
+### 1단계: 폴더 선택
+
+처음 실행하면 폴더 선택 화면이 나타납니다.
+
+```
+psTimer — 폴더 설정
+현재 위치: C:\Users\SSAFY\Desktop\BOJ
+
+[ ✓ 이 폴더 선택 ]
+[ .. 상위 폴더 ]
+📁 2263
+📁 1000
+```
+
+- 방향키로 이동, **Enter**로 선택
+- `[ ✓ 이 폴더 선택 ]`을 선택하면 해당 폴더를 작업 폴더로 설정합니다
+
+### 2단계: Java 파일 선택 (중요)
+
+> **주의**: 이 단계에서 파일을 선택하지 않으면 스냅샷이 저장되지 않습니다.
+
+```
+psTimer — Java 파일 선택
+폴더: C:\Users\SSAFY\Desktop\BOJ
+Space: 선택/해제  |  Enter: 확인
+
+▶ [ ] Main.java
+  [ ] Helper.java
+```
+
+- **Space**: 파일 선택/해제 (반드시 하나 이상 선택해야 합니다)
+- **Enter**: 선택 확정
+
+파일이 하나뿐이면 자동으로 선택됩니다.
+
+### 3단계: 문제 URL 입력
+
+메인 메뉴에서 **새 문제 풀기**를 선택한 후 백준 문제 URL을 입력합니다.
+
+```
+URL: https://www.acmicpc.net/problem/2263
+```
+
+### 4단계: 타이머 진행
+
+**읽기 단계 (빨간색, 15:00 카운트다운)**
+- 문제를 읽는 시간입니다
+- Java 파일 편집이 자동으로 차단됩니다
+- 15분이 지나면 자동으로 풀이 단계로 넘어갑니다
+
+**풀이 단계 (초록색, 45:00 카운트다운)**
+- 코딩을 시작합니다
+- 3분마다 자동으로 코드 스냅샷이 저장됩니다
+- 다 풀었으면 `s`를 눌러 정답 처리합니다
+
+### 5단계: 결과 확인
+
+```
+정답!
+읽기: 15분  +  풀이: 22분 53초  =  총: 37분 53초
+저장된 스냅샷: 7개
+```
+
+## 키보드 단축키
+
+| 단계 | 키 | 동작 |
+|------|-----|------|
+| 타이머 중 | `p` | 일시정지 / 재개 |
+| 풀이 단계 | `s` | 정답 처리 |
+| 타이머 중 | `r` / `q` | 타이머 종료 (확인 필요) |
+| 완료 후 | `n` | 새 문제 |
+| 완료 후 | `h` | 문제 이력 보기 |
+| 이력 상세 | `←` / `→` | 스냅샷 이동 |
+| 이력 화면 | `q` / `Esc` | 뒤로 |
+
+## 스냅샷 저장 위치
+
+스냅샷은 작업 폴더 아래 `.ps-timer` 디렉토리에 저장됩니다.
+
+```
+작업폴더/
+└── .ps-timer/
+    ├── problem.json              # 풀이 기록
+    └── snapshots/
+        └── {문제번호}/
+            ├── metadata.json
+            ├── snapshot_1_Main_java.java
+            ├── snapshot_2_Main_java.java
+            └── ...
+```
+
+## 설정 변경
+
+메인 메뉴에서 **설정 변경**을 선택하면 작업 폴더와 추적 Java 파일을 다시 설정할 수 있습니다.
+
+설정 파일 위치: `%APPDATA%\ps-timer\config.json`
+
+## 주의사항
+
+- Java 파일은 반드시 **Space 키**로 선택 후 **Enter**를 눌러야 합니다
+- 추적 파일이 없으면 스냅샷이 저장되지 않습니다 (메인 메뉴에 경고가 표시됩니다)
+- 읽기 단계에서는 Java 파일을 저장해도 자동으로 원본으로 복원됩니다

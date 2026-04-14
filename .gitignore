@@ -3,4 +3,8 @@ out/
 .vscode-test/
 *.vsix
 .ps-timer/
-".claude/settings.local.json" 
+.claude/settings.local.json
+*.exe
+cli/dist/
+cli/bundle.cjs
+
